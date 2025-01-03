@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KemTech - إكسسوارات الكمبيوتر</title>
+    <meta name="description" content="متجر KemTech - أحدث إكسسوارات الكمبيوتر بلمسة من الحضارة المصرية القديمة." />
+    <meta name="keywords" content="إكسسوارات كمبيوتر, لوحات مفاتيح, ماوس, سماعات, KemTech" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fafafa, #eaeaea);
+            color: #333;
+            line-height: 1.8;
+        }
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        header .logo img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+        nav {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #34495e;
+        }
+        main {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .product-item {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .product-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-item .image-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .product-item .image-slider img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: none;
+        }
+        .product-item .image-slider img.active {
+            display: block;
+        }
+        .product-item .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .product-item .slider-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+        .product-item .slider-controls button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .product-item h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+        .product-item p {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+        .product-item .price {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .product-item .whatsapp-btn {
+            background-color: #25d366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .product-item .whatsapp-btn:hover {
+            background-color: #128c7e;
+        }
+        .product-item .coming-soon {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer .social-links {
+            margin-bottom: 15px;
+        }
+        footer .social-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        footer .social-links a:hover {
+            color: #25d366;
+        }
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            header .logo img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2wUqEb0HKnjIr6DixRqg9HhHSHSe1QmLLUbpDEfJbNI3s9S0FN1w24TkGVBziG4kI0WBRbHXp1dkst5QJFzIlUz10Csa8acopYmo1UPbsoZ_I8kFQgTlO6-1e53yYW1aTGosl2uPGvrHYb70qVbIl5DTOw6Ady46NjMe1YFi8J7IPENkRYK-w-dLdg-Xt/s1120/The%20Kemtech%20logo%20is%20a%20vibrant%20and%20playful%20fusion%20of%20ancient%20Egyptian%20heritage%20and%20modern%20technology,%20crafted%20in%20a%20cartoonish%20style%20that%20makes%20the%20brand%20feel%20approachable,%20fun,%20and%20contemporary.%20The%20logo%20is%20desi%20%286%29.png" alt="KemTech Logo">
+            <h1>KemTech</h1>
+        </div>
+        <nav>
+            <a href="#products">المنتجات</a>
+            <a href="#coming-soon">قريبًا</a>
+            <a href="https://wa.me/message/VZ2DN2VZ7QI6O1" target="_blank" class="whatsapp-btn">تواصل عبر واتساب</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- المنتجات المتاحة -->
+        <section id="products">
+            <h2>المنتجات المتاحة</h2>
+            <div class="product-list">
+                <!-- المنتج الجديد: ساعة ليد 3D -->
+                <div class="product-item">
+                    <div class="image-slider">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYN8BSFP72PIxyajaUQKu4Ze5GeRq25DWmJDvhBa07jXtIzqLnjHEF9pzINphn9ocVhjL14y0UEoEIdMgfDVt_0ioAOiE4JhqK10A7HroiWi2Jw9KiFaOu3JBMEbv6wVputh-Z_otzZhrDCKHsWSx3V1muKeQfoC_DY6N2u6IBh641ZnbCp3b3aKxN-XsV/s1198/16534777382bc5ff3601f0229fa4110c780ff75a17_thumbnail_900x.webp" alt="ساعة ليد 3D" class="active">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUFtDi-lMyuvoOcnNGJeZVPjDTb6T-vk2MznvmoRAc7YwE8dzb_qjnQn99VycPh-3j7fvjXKZqvtvFawhUvMIhnKXPNrqm-acy8D4yk1rGGg2fi8EJCPYIrNAdZcM3ozLubPZm_js53HOpDjtWjLjJqmExLwl8FXaxcchF-HmZi4ITLyMkKM4sdv0q3wO1/s320/170167408969d626b395e71606f887c69044870ee1.webp" alt="ساعة ليد 3D">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHa5Ky-AL0bYVIGh-uMDCm84zkFemwVeSJRyHiUV4eV4IQw1JFzyIN1nacoIHJHaxYkJHzV2Y9qRVdp32xigeahvWpj_bfkGSn8SZg1edgOOMkaH4-nFePbdb48seYDcUS5EOh1RrVSm2Dg-QfXXL_LNsQBzuY098u4w0Q7zKEJ4qCnR8EQhSowSKxQvEq/s320/1708961596f4ea0efb6cd1f7267a734a8f657236fb_thumbnail_405x552.jpg" alt="ساعة ليد 3D">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpE3-6nX1RFkJ1UY5YCljBnFtdUqumU7O0hcfxNk79NZnShP-jK-myDCFaxVWj0EZGsud9iuSInbfWFe5BPvLTGxIb-hrGI31QYjGbwdVBLCuOf2cQZcg7UooULa5az_TzDKW9-RyM_rjbqXirmdeDMr8HuVnVYJUPkbtfGeD7qVIo2U3R44ewD1awLYzN/s320/1701674180906182ce41cbffcb2ab0ac336f0f7d5f.webp" alt="ساعة ليد 3D">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHDzS06pTtKhxh5Md0avSV6Lsk4cWhs-5140Q1SReKMKTmsmdMBhRsigsXcv1dl97syS51_5ciIX0vF1Q2NXac5VT9PoiznbokA9uhgI7uXqirLbweLj5cYRKEJ-cGkcN7oT_xFA1pPedZvz2WEOEMM3yRTr989hESo8fOoZi5KyKieCzjoSey2_ea70Bs/s320/17016741819b3e25f53207ae30320686f444923a38.webp" alt="ساعة ليد 3D">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg80iKSuLsIuLic-fPpsgHUBefoWM-ixSKhVnZqqQzCFvOw3vHWnUs8PYO6mHxTZt8WeygLLo0NCEoxOe8w8K1nLt1VHtgzO7VayER2RrpQuErA2lj06yPzNbJHcLzIg1UzoNr7G_kiR78oy0AlDooYT18hAcp9DkqL9-J_yXsrcX6ufA-pZVvClV4titn7/s320/17016741031d9597ddb832e9bb3476134b9b6fd022.webp" alt="ساعة ليد 3D">
+                        <div class="slider-controls">
+                            <button onclick="prevImage(this)">&#10094;</button>
+                            <button onclick="nextImage(this)">&#10095;</button>
+                        </div>
+                    </div>
+                    <h3>ساعة ليد 3D</h3>
+                    <p>ساعة ليد بتصميم ثلاثي الأبعاد وعرض رقمي مذهل.</p>
+                    <span class="price">السعر: 260 جنيه</span>
+                    <a href="https://wa.me/message/VZ2DN2VZ7QI6O1" target="_blank" class="whatsapp-btn">طلب عبر واتساب</a>
+                </div>
+                <!-- المنتج الجديد: شريط ليد RGB -->
+                <div class="product-item">
+                    <div class="image-slider">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhr5qW8mv8U9RIg0iVSe3OyFcUHPt5XmadkHiJJly90rUqY87r1-semteMsFiWMItfEiLgj3X6p4IB3oqSvLo_KWBgE0dSVp7JpsxP_oBQUtiPbYutzkosOJibjuHauBqz9HikJ5WCjJygZ0CMnlb5IZ7YdT3MLJDZus7ySOpxmKSTyjSmajaKDXBGif4BG/s220/1723774142bf338f5ed2247d588f87ee8d056a1a82_thumbnail_220x293.webp" alt="شريط ليد RGB" class="active">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMNlXjI-3R_76rxo6WFe4LZwIDpyfiC5xht7mgUh1vfW7VTrzonyrAFly7LCZQ05acjYuyfhpDsSJF7bcvL4zpYUAJvuPD2JslN_KzLeKz82l81dAXxgaQfyTdumQoRu8hLHHmYyMpMEGasWZfxRAUGp4By8OQ-M12_LDK-eKLm7r9gzgOqYfoQec6sXkU/s220/1684568697aef06b4c218360c0b021836291354711_thumbnail_220x293.webp" alt="شريط ليد RGB">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpwTayVFNkhTPwYgArC4Li8jNxt3Y9iXFLagcDfu4i8j5UIRnmjKOHQ6W9kIFBcumFC5k3sf-Pipi6JYL5VM4Jrtm81X3wS9bR4yK4YKNH96rxnIR-RRcWFn55rblxvqf5MAHokcp_YvHspvCNLk6OBfb9AKIkEILk9otPq667LXPfAB82L4PrTotcR5HH/s220/1725076805c629fcb0ea8aaf74a821af8ce3176a04_thumbnail_220x293.webp" alt="شريط ليد RGB">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0L5XoTZfAnI7NBBszARvzxIeIgtA5IBPNMbjxvdOU0roGnIcLGovIeRS9ff5cwh5qyydCcSapGp4GiWplk_nqgODzZY77Hc8lRQygoZjnHRxkCxw81IcMxOp3pwgqnxArbLr9NcBgrvL9yVsnL7-I04lls5NBqGpo2JLo55ir6TFLQ_CC8Qynhgzd4RU9/s220/168456869722f3fa35960bab460570e494f565b0b4_thumbnail_220x293.webp" alt="شريط ليد RGB">
+                        <div class="slider-controls">
+                            <button onclick="prevImage(this)">&#10094;</button>
+                            <button onclick="nextImage(this)">&#10095;</button>
+                        </div>
+                    </div>
+                    <h3>شريط ليد RGB</h3>
+                    <p>شريط ليد 10 متر تتحكم فيه بالريموت أو الأبلكيشن، وبيتفاعل مع الأصوات.</p>
+                    <span class="price">السعر: 280 جنيه</span>
+                    <a href="https://wa.me/message/VZ2DN2VZ7QI6O1" target="_blank" class="whatsapp-btn">طلب عبر واتساب</a>
+                </div>
+                <!-- المنتج الجديد: ماوس باد أبيض -->
+                <div class="product-item">
+                    <div class="image-slider">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzgKdCK2tvMHowIB2PoWZhLC3gMwFbTfTp-waIxwR1IAiv1sOzRbCN-k8HSj5NB9w9DXMNB7l8_RwxU09RdpGNOqRfxusdzrOJRiJ0R4ACrSb1EQ0x10mKz9jb4oWBSnS7SvbJH2SPjAtnLYTRO1vkcQ6HKu6ks20CPMkuToOIaHy1RDIJbmkZWhOyUVVu/s405/1697117262f6b58aa17bfb9d3566862802451d7dcf_thumbnail_405x552.jpg" alt="ماوس باد أبيض" class="active">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiX1wAtNLG8oHN2w2SN34RbzjxZT63g32x0i2o3DrxWHqvU9cf1Thu4FBN-PfR5Zx78n0eaasxsxmCORDuUf5LgYtWBgpok89Lgnhtqul-p1KnpS8Ar32EdkwwybqPfR27WVbXrPCxOwDuoxN-x2_RJRHOIdhTLSpvHfgpah6-vmPrWi3HFWs-SPDQHOwC/s405/1728028911ec8acde066193c0933dbbaca49f4c5af_thumbnail_405x552.jpg" alt="ماوس باد أبيض">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNazjFvwlBtCaSPIuReeOXsGMUODDpoOrwvrt19OywKQM5-A_YGJePucRNXdZWJ4WQj2UdjarxcDMsIPukh6LW4_yzhSMs_YkLEPdOrIGOJEWDpdpGzmsvSNo-GSNKM-j7jhaCxNgaLTj8njy4ayPtywHgHuVWuhY-BWZUqqDnBflAxrTSRwwGupP9wRWz/s900/1716989824a7401ac77f6cc23c8216bc9391db4ab8_thumbnail_900x.jpg" alt="ماوس باد أبيض">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj59l5-yoOp1GZ5XVJVvAhJ9Y9CK8QJK5t3_VaF7LkorJnnVvDEbv1wqz2Do6I_tbF3TElcNnOpNXZw1qCqbI8BIJN7yUDsdhSbHfbqpIIf4o0kXKMWBqBc3zthyphenhyphen1zyCQ_8wnLmK3Pgx1OspnKpgLXpMGST50EghQ2dfs4XjUV5OuH-Ucwu_9_8suM7MbfF/s900/1716989883c3e664c994fd222fb0616a2b679b8f36_thumbnail_900x.jpg" alt="ماوس باد أبيض">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR2IE39oefsLS2uIRDPewEO9fnZ5Vp8s1mbZlxOEUAiMXmWXNK9Fsi-Wd3sezCm81xwKuAP7w8aVS_UFMxaaYUT7GEGbTZJssAvGRcnmqQGb74JTcNNNb-2OWuYp6oOT55fZzAfDTGIjCI9BtjYReqJ34mG776mRqsxZXvN10Q3Xl1o2s8W5-53GYzKzJl/s900/1716989824a0baf0373a34da7efa32ac5098839b86_thumbnail_900x.jpg" alt="ماوس باد أبيض">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgIH6YvnKs6Agpme9Xuwkogo8d3p_s5uX3lFdGmb5cqCpln4ogwe7F95vVaOxvUVuEfO4LkG0FB7DrbunY5Asear9dPJCvIDJfM3Ki7rf0unwSBSPhEIhzxvHAhHVj4R_lH4-z0tURjdKhxHL200Fbq2hAf8y-tsCkIx7HRxSClvHQ-NU77jb9FvgdJ4rW/s900/17169898245ed6c6794d040f039ee3feb84e298887_thumbnail_900x.jpg" alt="ماوس باد أبيض">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiouwAa6PhtV-SBrKDsdIrbq2yhsYklW7JvdEyCFIC2_hkKx-p-vLU3ZFZ43GvuJgwAWd4IYURUH9UF6TfbQbGWffUx_pDnGloMz5e2Hc8ykq9OZ_uSqc9szqneYbTmdFRrDmA5VJcGbUIYMcbGMAkgaEq9j3x5812Xv5memAGd1oypQL0YbYLPbiSQGSDc/s900/171698982486f1cd0364163371550d67a88606f06b_thumbnail_900x.jpg" alt="ماوس باد أبيض">
+                        <div class="slider-controls">
+                            <button onclick="prevImage(this)">&#10094;</button>
+                            <button onclick="nextImage(this)">&#10095;</button>
+                        </div>
+                    </div>
+                    <h3>ماوس باد أبيض</h3>
+                    <p>ماوس باد أبيض بمقاس 40x90، مقاوم للمياه ومصنوع من مطاط طبيعي عشان يوفرلك أداء ممتاز.</p>
+                    <span class="price">السعر: 400 جنيه</span>
+                    <a href="https://wa.me/message/VZ2DN2VZ7QI6O1" target="_blank" class="whatsapp-btn">طلب عبر واتساب</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- المنتجات القادمة -->
+        <section id="coming-soon">
+            <h2>المنتجات القادمة</h2>
+            <div class="product-list">
+                <!-- المنتج الجديد: كرة بلورية -->
+                <div class="product-item">
+                    <div class="image-slider">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVYHKTtqTnx6frJp5xq1yuZyn2z87w1g9z3_yCEvnT1i7sKqYkMNQ6AQmEH85SOzAMuJQ8Ucq-59QZ68YvaAHO_xbz0dvKZeJMcgdXueWukEUeAMwjbdg5WP7zWkwAIIKFjQuRYx2S0JFcoCibGXDgcu6bAHCHrN8GEq0d8k6NroZAiD2JFCLwXC6V9l25/s320/1686714040026ca90add51e6d8417dc19f4fdc657c_thumbnail_900x.webp" alt="كرة بلورية" class="active">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigPwYMu-ybG_p0QUcXIerij12lnrEahLKy5GByqBrvKS2MYC_MXgsGSGl4MrovuXZbeHgVj4YwCuphNSTxWEPbe0BN_ycw2MHjHK8EElGrT4aqGGw28c4ycDCe-ZJVxaTyDhzPI8X5ug0c11dpTo2ELv_ANreA0q-CMhSwbpbTNCBdz0Ngp9rV7mxj_6GU/s320/16867140405f28910fb691d298fd8ba1aa10a7b164_thumbnail_220x293.webp" alt="كرة بلورية">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUSC5eTWz2OuK0KfBj59tsxDTbhAu4O9zIANMLtYkVWkMTrgsGdmJvlRM7KofAnz7vtbkf2JxZMM0EzxYKwPemzoQk3D4bteDyaNbSZCbtAjJrWIJCnNYLQ_MdhR3CIYQHXYiwUvnJBWnFWdNQERcdsDuT5RXSsgHW9GVRYlIxKbq0uaPd6q_fRB8Odn8P/s320/1686714040ece1fd0e2c140d987c5ef591f157a1f2_thumbnail_220x293.webp" alt="كرة بلورية">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtZ4XTD2J7KCnKoF7iF9Xri8hnAxCNazI50HFeoc3-z9uDM_pW8lxaUjq70JFSDeLflOHREKrqTNXoxmO3f_RkD24b04tMd1anv51a4WPPLwe62lK87s0Kesb-F9TveWN_kFxAkyhgkX8VJN07IhYmqIlMKlRvNqVA7tAODL5Mb1Z1Wt-y2TTjdRK8zF3-/s320/1686714040e51accda076e9b2deb161ea5d2ffd88c_thumbnail_220x293%20%281%29.webp" alt="كرة بلورية">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWpPKstmBqyfq6zBslDJzfK7s3WRgXbToc0IFiwcSp3VRXhvJi-CsQTnLAC-Oyj7HpjnSYQUULMbwtq18acUKQZXXiUCUVm5Ngvzy2kygXFRoxTQySBgVBaxIrm53hKii1Af0mrs0TkP_Yhyphenhyphens8YPxuyr6naxPI5Z33rHP6Z9TH5_qGtOxpd4fZnaqJZXDK/s320/1686714040394030458147e05e0f6430c71e946bd7_thumbnail_220x293.webp" alt="كرة بلورية">
+                        <div class="slider-controls">
+                            <button onclick="prevImage(this)">&#10094;</button>
+                            <button onclick="nextImage(this)">&#10095;</button>
+                        </div>
+                    </div>
+                    <h3>كرة بلورية</h3>
+                    <p>كرة بلورية مزخرفة بتصميم كوكب زحل.</p>
+                    <span class="price">السعر: سيتم الإعلان عنه قريبًا</span>
+                    <div class="coming-soon">سيتوفر قريبًا</div>
+                </div>
+
+<!-- المنتج 1: ربط الكابلات -->
+<div class="product-item">
+    <div class="image-slider">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqGKZvGq3txpggBHwfrv9boUQov-ybmyy7MoGHwaUBN71SIeVIT6QJ7PfVHy_Q4z92B5TlTLLIpb3PSXxj29Ol4yI09RwqaKccaNbjO1FuZDjvFMq1aq-RBdz8vfqrxL9_sQFAEFlAJkQrA5XlSrwOMqzMS_DRFciY-3OWCzZGEdp2LtvpH10c5rzN9waB/s320/16933029703e76ef96e8dce658fe6b4f0502b00b15.webp" alt="ربط الكابلات" class="active">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg0dmDPUXb0y2dQ2ws3_EDQDvYtrmhm1DdMkewJEMxgR5pV9IV0Ax7admL1UEkPLXTds3UFfnTTYw1m6XkqJbrADZRfjO1fkhPgz-75Eprq-n6r9Q4aQuToedhasDj-rxvXQo5z3rS77jl_sls2G2owOS-qBpbLGLKw5XhYTnZGBkhUj0LjN1nqlHCA8sr/s320/1693302965fac05c481fd3adfc1e925fb3410ec565.webp" alt="ربط الكابلات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEge2J2KwUuq2VkLgOvBE8JxSW5y_Rj9regwZEyRsil_BR18dPWfmghP9kZA7YrG5ZD6kRoDQrb9pkJ8-BaisebksA5QZ1GTp1tItRAGjVKKT4erexswdyweaQhOjpGsbU_WGCdbJz0finznP756i83Iv7LAge-ACtng1wLMJg-WlQRFVTzsfkatETLT-jAQ/s320/1693302956191ca9db4394ccced5a4bc5949f69718.webp" alt="ربط الكابلات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj931b09dGgaAHJcKQ-Wg-eWgmnni0O8ZNWr2Qaz3LlqXgdrMHxwJ7jRlY_EWUC25hHuuSgQ8NbHNr6aWoBR8rYtQ5FbIDJYosN167xsu3JDfQl4LTalWJN1M4UIqV_CoiXzqvA5mp32JS-NoAjcL35ueiDXCoSS_e6mXK6HnK85a36PuJj0IrBNHSIhkD/s320/16933029288e062320dcee47b1e0169f9c72d85c41_thumbnail_220x293.webp" alt="ربط الكابلات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPVRgdNsajVdAsmEXWG6AXU-j7HTqbrmaQ7Jvq_zmvSsMan6c44u93k9YFwquCcCA8c4pz2jK5xVtkxVjtKH__YMp1FtU4843zX9xDlcTAnmVFD24cMBrW-ENlhjWml-ogrWnxP5EhmnIU38o3eAupTDwiOWfwsPPc0Mc0Bf2a3p_QwRfDS9SYuuvumiro/s320/171991761224de18a46686d957a1e63014fff88e6e_thumbnail_220x293%20%281%29.webp" alt="ربط الكابلات">
+        <div class="slider-controls">
+            <button onclick="prevImage(this)">&#10094;</button>
+            <button onclick="nextImage(this)">&#10095;</button>
+        </div>
+    </div>
+    <h3>ربط الكابلات</h3>
+    <p>ربط منظم الكابلات القابل لإعادة الاستخدام.</p>
+    <span class="price">السعر: سيتم الإعلان عنه قريبًا</span>
+    <div class="coming-soon">سيتوفر قريبًا</div>
+</div>
+
+<!-- المنتج 2: مجموعة مفكات -->
+<div class="product-item">
+    <div class="image-slider">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhh_2XZqjGRqf6WgJjnLnpB6_A8AuSBmXBe1gwcDWHukgA7Wooyj8jzGO9kbT5-a1oNNMQ6NiWB2rZJhfm7U6mU7XRTAyHoN3eldyz2QX9eaH43HwzXrjQNXD0s0CY_WVqhmVkHkq8IB4sVWXM7DX_popk8Gvowo_3Qu-P56uhNs3nIAaMojrFensn78M1p/s320/17044639903d14725244f89419f634b31f9b59aff2_thumbnail_900x.webp" alt="مجموعة مفكات" class="active">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_J6RLgbnw47qN584ktHpDS6S4QuncXW_9YspWYq3vaJgDjMbN4DOAOPoLQQQHS4wczGJaXMScDvglYgUQHarz_B5hfOD0M21nG-8OI0CpMslTi0ZO-nD4uVXeBt13XVdXf1zgCuqcv6oDcLTiasEriX8iwIfC-AxxmAyVhQqWAYLDheAEjDjIi-DGebo1/s320/17044639903c2577df3455d1b13c4c30df865dd5b4_thumbnail_220x293.webp" alt="مجموعة مفكات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_qxJxOApFXB_3iHJx-iypqHpNOZABLFjbHYW5wzM3qoazqqE1yApeMKSCle_XiSG1GSChVb_vjfBeQJ1EDsoMJ4qyAd4-W56t90VcZ0m3Q2T-DfedI9mGXrXmpun8uKKLV_8DKSs8NcGSrtrr21pUMTaMVFsZUnjFATcfrokhyphenhyphenNCqUpvsxo1k8k8AMycg/s320/1704463989bbd553971a2ce358aad583b65bf46525_thumbnail_220x293.webp" alt="مجموعة مفكات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOY-Q9kSfrAnN-NBjpgzcKyzkh0DCrCnDLyKOVWWzQcGq5lCQy3uWu5s7rnj2URfvlAckrM3s0g2u7KUzdQtvrkudEW3gRp6kESh572FhkjQjnhaArRUEon5CwgSY9M2Vj3bI282c7aBFXmUYnnBYttyjQn-wQ5Vfp1KosJBvHxjBgMgNfystX_XMTT1Sv/s320/17044639888a6999dff69d80a67cac8d4bb666f1cd_thumbnail_220x293.webp" alt="مجموعة مفكات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj2gEGK6TYGbxQIE29I0XFdl5jta9YHkg9if1seN0YkGG-ylED9RVEL0t2fZAs-bIiQtNkXyRbub2r2Y5nSDujDrNzmFcyZp-3FXwUhCWz3Fp4FnRe6bNUxdE6I7_I8Ho_lG6qAQr2cGd62Lo2bd-SKUSElvafd4RzghPj4cFzmYvUVmny_e75bt72oHxO/s320/1704463987a29c5c17525a1cdd9ed96edd91bf70d3_thumbnail_220x293.webp" alt="مجموعة مفكات">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnD6tBs7mkcUo2yYt5ZmJona-z_hVNjOklb8mmT6_8qexyG-GAkYLbLAbrlUfv0ow8BT6eGWs7F2x1vWHM7byBi2m3NK0TVixxPW8gRakuIMiVC39UAQXNgV2GWnnyjwKQK2iDEK1OeJE4vX6zvAitBPywmFn7KLGI2FIbpdAjZY3oIT5bdxI_0ivF9_OL/s320/1704464031ba5adbe6796b23cd91f54a67b87fbca7_thumbnail_220x293.webp" alt="مجموعة مفكات">
+        <div class="slider-controls">
+            <button onclick="prevImage(this)">&#10094;</button>
+            <button onclick="nextImage(this)">&#10095;</button>
+        </div>
+    </div>
+    <h3>مجموعة مفكات</h3>
+    <p>مجموعة مفكات دقيقة 24 في 1: أداة إصلاح لا غنى عنها للهاتف المحمول والكمبيوتر اللوحي.</p>
+    <span class="price">السعر: سيتم الإعلان عنه قريبًا</span>
+    <div class="coming-soon">سيتوفر قريبًا</div>
+</div>
+                <!-- يمكن إضافة المزيد من المنتجات هنا -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>© 2023 KemTech. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        function showImage(slider, index) {
+            const images = slider.querySelectorAll('img');
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+        }
+
+        function prevImage(button) {
+            const slider = button.parentElement.parentElement;
+            const images = slider.querySelectorAll('img');
+            let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            let prevIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(slider, prevIndex);
+        }
+
+        function nextImage(button) {
+            const slider = button.parentElement.parentElement;
+            const images = slider.querySelectorAll('img');
+            let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            let nextIndex = (currentIndex + 1) % images.length;
+            showImage(slider, nextIndex);
+        }
+    </script>
+</body>
+</html>
